@@ -1,0 +1,25 @@
+# Python 3.10 or newer (3.10-3.12 if you also want Marker)
+langchain>=1.0
+langchain-openai>=1.0
+langchain-chroma>=1.0
+langchain-community>=0.4
+langchain-text-splitters>=1.0
+chromadb>=1.0
+streamlit>=1.40
+python-dotenv
+requests
+pydantic>=2
+beautifulsoup4            # web articles (WebBaseLoader)
+pypdf                     # PDF text + images if Marker is not installed
+Pillow                    # images
+youtube-transcript-api    # YouTube video transcripts
+
+# Optional: OCR text from images. Also needs the Tesseract program installed on your computer.
+# pytesseract
+
+# Optional: free local embeddings (set EMBEDDING_PROVIDER=local in .env)
+# langchain-huggingface
+# sentence-transformers
+
+# Marker (PDF -> Markdown + images) is in requirements-marker.txt.
+# It needs Python 3.10-3.12 (it pins an old Pillow that does not support Python 3.14).

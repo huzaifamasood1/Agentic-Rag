@@ -1,0 +1,5 @@
+# Optional: better PDF conversion (keeps headings, tables, equations, figures).
+# Install with Python 3.10-3.12 only:
+#   pip install -r requirements-marker.txt
+# Without it, PDFs are read with pypdf (plain text per page). Everything else still works.
+marker-pdf

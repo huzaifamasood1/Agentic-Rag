@@ -1,0 +1,22 @@
+# Secrets
+.env
+
+# Generated - rebuilt by load_team_data.py
+chroma_db/
+extracted_images/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Evaluation results ARE kept (needed for the presentation).
+# Uncomment to exclude them:
+# evaluation_results/
