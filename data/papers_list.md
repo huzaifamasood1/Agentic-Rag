@@ -1,0 +1,16 @@
+| # | Title | Authors | Year | Link |
+|---|---|---|---|---|
+| 1 | Structurally-bounded Agentic Graph Exploration for Evidence-Grounded Scholarly DeepSearch | Rima Hazra, Sayan Layek, Somnath Banerjee, Soumen Chakrabarti, Animesh Mukherjee | 2026 | https://arxiv.org/abs/2608.24809 |
+| 2 | GTA-RAG: Graph-Trajectory-Augmented Reinforcement Learning for Multi-Turn Retrieval-Augmented Reasoning | Jun Chen, Yongchao Liu, Pengyu Qiu, Jiajun Zheng, Juelu Zhang, Yujie Zeng, Qin Zhang, Ziyue Qiao, Xiao Luo | 2026 | https://arxiv.org/abs/2608.22479 |
+| 3 | SSE-Bio: A Structured Self-Evolving Agent with Agentic Retrieval Policy for Multi-Hop Biomedical Reasoning | Zhaohan Meng, Zaiqiao Meng, Siwei Liu, Hao Xu, Ke Yuan, Iadh Ounis | 2026 | https://arxiv.org/abs/2608.22132 |
+| 4 | When Failures Propagate: Causal Failure Attribution in Agentic Retrieval-Augmented Generation | Lauren Pothuru | 2026 | https://arxiv.org/abs/2608.20627 |
+| 5 | When Should Active RAG Retrieve? A Budget-Aware Evaluation of Utility, Calibration, and Cost | Pin Qian, Su Wang, Chong Peng, Junxian You, Lifei Liu, Haoran Yu, Yihang Chen, Xiaochong Jiang | 2026 | https://arxiv.org/abs/2607.24010 |
+| 6 | Critic-R: Improving Agentic Search using Instruction-tuned Retrievers with Natural Language Introspective Feedback | Md Zarif Ul Alam, Alireza Salemi, Hamed Zamani | 2026 | https://arxiv.org/abs/2606.00590 |
+| 7 | GrepSeek: Training Search Agents for Direct Corpus Interaction | Alireza Salemi, Chang Zeng, Atharva Nijasure, Jui-Hui Chung, Razieh Rahimi, Fernando Diaz, Hamed Zamani | 2026 | https://arxiv.org/abs/2605.29307 |
+| 8 | Retrieval as Reasoning: Self-Evolving Agent-Native Retrieval via LLM-Wiki | Haoliang Ming, Feifei Li, Xiaoqing Wu, Wenhui Que | 2026 | https://arxiv.org/abs/2605.25480 |
+| 9 | A-RAG: Scaling Agentic Retrieval-Augmented Generation via Hierarchical Retrieval Interfaces | Mingxuan Du, Benfeng Xu, Chiwei Zhu, Shaohan Wang, Pengyu Wang, Xiaorui Wang, Zhendong Mao | 2026 | https://arxiv.org/abs/2602.03442 |
+| 10 | Towards Agentic RAG with Deep Reasoning: A Survey of RAG-Reasoning Systems in LLMs | Yangning Li, Weizhi Zhang, Yuyao Yang, Wei-Chieh Huang, Yaozu Wu, Junyu Luo, Yuanchen Bei, Henry Peng Zou, Xiao Luo, Yusheng Zhao, Chunkit Chan, Yankai Chen, Zhongfen Deng, Yinghui Li, Hai-Tao Zheng, Dongyuan Li, Renhe Jiang, Ming Zhang, Yangqiu Song, Philip S. Yu | 2025 | https://arxiv.org/abs/2507.09477 |
+| 11 | Search-o1: Agentic Search-Enhanced Large Reasoning Models | Xiaoxi Li, Guanting Dong, Jiajie Jin, Yuyao Zhang, Yujia Zhou, Yutao Zhu, Peitian Zhang, Zhicheng Dou | 2025 | https://arxiv.org/abs/2501.05366 |
+| 12 | PlanRAG: A Plan-then-Retrieval Augmented Generation for Generative Large Language Models as Decision Makers | Myeonghwa Lee, Seonho An, Min-Soo Kim | 2024 | https://arxiv.org/abs/2406.12430 |
+| 13 | SPARKLE: A Structured and Plug-and-play Agentic Retrieval Policy for Adaptive RAG Models | Jinyuan Fang, Zaiqiao Meng, Craig Macdonald | 2026 | https://aclanthology.org/2026.acl-long.1793/ |
+| 14 | Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks | Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela | 2020 | https://arxiv.org/abs/2005.11401 |
