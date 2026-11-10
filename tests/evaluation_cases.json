@@ -1,0 +1,65 @@
+[
+  {
+    "question": "What is PlanRAG, and how much did it outperform the state-of-the-art iterative RAG method on the Decision QA (DQA) benchmark?",
+    "category": "in_scope",
+    "reference_answer": "PlanRAG (iterative plan-then-retrieval augmented generation) first has the LLM generate a plan for the decision, then the retriever generates queries for data analysis, re-planning if needed. On the DQA benchmark, built from the games Europa Universalis IV and Victoria 3, it outperformed the state-of-the-art iterative RAG method by 15.8% in the Locating scenario and 7.4% in the Building scenario.",
+    "expected_keywords": ["planrag", "locating"],
+    "source": "PlanRAG (Lee et al., 2024), 2406.12430v1.pdf, p. 1"
+  },
+  {
+    "question": "What two components does Search-o1 add to large reasoning models such as OpenAI-o1?",
+    "category": "in_scope",
+    "reference_answer": "(1) An agentic RAG mechanism that lets the reasoning model search for external knowledge in the middle of its reasoning whenever it hits an uncertain knowledge point, and (2) a separate Reason-in-Documents module that analyses and refines the verbose retrieved documents before they are injected into the reasoning chain, reducing noise. It was tested on science, maths and coding reasoning tasks and six open-domain QA benchmarks.",
+    "expected_keywords": ["search-o1", "reason-in-documents"],
+    "source": "Search-o1 (Li et al., 2025), 2501.05366v1.pdf, p. 1"
+  },
+  {
+    "question": "Which three retrieval tools does the A-RAG framework give to the model?",
+    "category": "in_scope",
+    "reference_answer": "keyword_search, semantic_search and chunk_read. These hierarchical retrieval interfaces let the agent itself decide how to search and read at different granularities, instead of a fixed single-shot retrieval or a predefined workflow.",
+    "expected_keywords": ["keyword_search", "chunk_read"],
+    "source": "A-RAG (Du et al., 2026), 2602.03442v1.pdf, p. 1"
+  },
+  {
+    "question": "What is the AgenticRAG-FP benchmark, and how well did coverage-based diagnosis find the faulty hop?",
+    "category": "in_scope",
+    "reference_answer": "AgenticRAG-FP is an interventional benchmark for causal failure attribution in agentic RAG: it injects a certified fault at a chosen hop, re-runs the rest of the trajectory and checks whether diagnosers find the injected hop. In the Claude Haiku 4.5 sweep on 80 three-hop MuSiQue questions, coverage-based diagnosis scored 0.91 when the fault was at hop 1 but 0.00 at hops 2 and 3.",
+    "expected_keywords": ["agenticrag-fp", "musique"],
+    "source": "When Failures Propagate (Pothuru, 2026), 2608.20627v1.pdf, p. 1"
+  },
+  {
+    "question": "How does SPARKLE control retrieval in adaptive RAG, how is it trained, and what improvements does it report?",
+    "category": "in_scope",
+    "reference_answer": "SPARKLE adds a separate proxy model that controls the retrieval process using knowledge-graph-based reasoning, working independently of the retriever and the LLM (plug-and-play). It is trained with reinforcement learning, treating the retriever and LLM as part of the environment, with a binary tree-structured rollout strategy for exploration. It improved over state-of-the-art baselines by 9.17% on average on three in-domain and 2.85% on four out-of-domain QA benchmarks.",
+    "expected_keywords": ["sparkle", "proxy model"],
+    "source": "SPARKLE (Fang et al., ACL 2026), 2026.acl-long.1793.pdf, p. 1"
+  },
+  {
+    "question": "According to the budget-aware evaluation paper on Active RAG, what should evaluations report besides accuracy, and what did the authors find?",
+    "category": "in_scope",
+    "reference_answer": "They should report utility/threshold frontiers, the realized retrieval usage, threshold-transfer error, harm rates and cost decompositions. They found that retrieval harm (retrieval making an answer wrong) is non-negligible, router rankings change across datasets and budgets, nominal thresholds can miss the target usage, and simple uncertainty or retrieval-score baselines often rival learned utility routers.",
+    "expected_keywords": ["active rag", "harm"],
+    "source": "When Should Active RAG Retrieve? (Qian et al., 2026), 2607.24010v1.pdf, p. 1"
+  },
+  {
+    "question": "What generator and document index does the original RAG model by Lewis et al. (2020) use?",
+    "category": "in_scope",
+    "reference_answer": "The generator is BART-large, a pre-trained seq2seq transformer with 400M parameters. The index is the December 2018 Wikipedia dump, split into disjoint 100-word chunks for a total of 21M documents, retrieved with DPR.",
+    "expected_keywords": ["bart", "100-word"],
+    "source": "RAG (Lewis et al., 2020), 2005.11401v4.pdf, pp. 3-4"
+  },
+  {
+    "question": "In A-RAG and in SPARKLE, who decides how retrieval happens: the LLM itself or a separate component?",
+    "category": "in_scope",
+    "reference_answer": "In A-RAG the LLM itself decides: it is given retrieval tools (keyword_search, semantic_search, chunk_read) and calls them as an agent. In SPARKLE a separate proxy model decides when and what to retrieve, and the retriever and LLM are treated as the environment, so it works with different LLMs without finetuning them. (Multi-hop: needs both papers.)",
+    "expected_keywords": ["chunk_read", "proxy model"],
+    "source": "A-RAG 2602.03442v1.pdf p. 1 + SPARKLE 2026.acl-long.1793.pdf p. 1"
+  },
+  {
+    "question": "What accuracy did PlanRAG achieve in its Civilization VI scenario?",
+    "category": "unanswerable",
+    "reference_answer": "Not answerable: PlanRAG has no Civilization VI scenario (false premise). Its DQA benchmark has two scenarios, Locating and Building, built from Europa Universalis IV and Victoria 3. The system should say it does not know or correct the premise.",
+    "expected_keywords": [],
+    "source": "Trap question based on PlanRAG, 2406.12430v1.pdf"
+  }
+]
