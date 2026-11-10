@@ -1,0 +1,15 @@
+# --- RAG and agentic RAG ---
+https://www.youtube.com/watch?v=T-D1OfcDW1M
+https://www.youtube.com/watch?v=0z9_MhcYvcY
+https://www.youtube.com/watch?v=Y1PaM3edYoI
+https://www.youtube.com/watch?v=F8NKVhkZZWI
+
+# --- RAG vs fine-tuning ---
+https://www.youtube.com/watch?v=00Q0G84kq3M
+https://www.youtube.com/watch?v=zYGDpG-pTho
+https://www.youtube.com/watch?v=-W2JdSl1v48
+
+# --- Vector databases and GraphRAG ---
+https://www.youtube.com/watch?v=gl1r1XV0SLw
+https://www.youtube.com/watch?v=Aw7iQjKAX2k
+https://www.youtube.com/watch?v=tTwBKXHIiMg
