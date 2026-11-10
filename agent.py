@@ -21,7 +21,7 @@ Every decision is saved in `trace` so the UI can show what the agent did.
 import time
 from typing import Literal
 
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from pydantic import BaseModel, Field
 
 import config
@@ -48,7 +48,7 @@ class Reflection(BaseModel):
 
 
 def get_llm(temperature: float = 0):
-    return ChatOpenAI(model=config.CHAT_MODEL, temperature=temperature)
+    return ChatOllama(model=config.CHAT_MODEL, temperature=temperature)
 
 
 # ---- Helpers ------------------------------------------------------------------
