@@ -19,9 +19,7 @@ st.title("🤖 Agentic RAG Research Assistant")
 st.caption("Ask anything about Agentic RAG. The agent decides whether to search, rewrites your "
            "question, picks a source (our notes, arXiv, Wikipedia, code) and searches again if needed.")
 
-if not config.OPENAI_API_KEY:
-    st.error("No OPENAI_API_KEY found. Add it to the .env file and restart.")
-    st.stop()
+
 
 # ---- Sidebar: settings + adding knowledge -----------------------------------------
 with st.sidebar:
