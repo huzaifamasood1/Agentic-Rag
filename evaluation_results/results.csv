@@ -1,0 +1,104 @@
+system,style,mode,question,category,answer,seconds,sources,searched,faithful,correct,hallucinated,declined,relevance,reason
+plain LLM,-,-,"What is PlanRAG, and how much did it outperform the state-of-the-art iterative RAG method on the Decision QA (DQA) benchmark?",in_scope,"PlanRAG is a method developed by researchers for improving the performance of Retrieval-Augmented Generation (RAG) models, particularly in tasks that require planning and decision-making, such as the Decision QA (DQA) benchmark. The DQA benchmark is a specific task in the field of natural language processing where the goal is to generate a decision or recommendation based on a set of provided documents.
+
+Regarding the performance improvement of PlanRAG over the state-of-the-art iterative RAG method on the Decision QA (DQA) benchmark, the exact performance improvement metrics are not provided in the information available to me. Typically, such improvements are reported in terms of metrics like F1 score, accuracy, or other relevant evaluation metrics for the Decision QA task. To provide a precise answer, I would need to refer to the specific research paper or report that details the results of the PlanRAG method on the DQA benchmark.",5.92,0,False,,False,False,False,3,The answer provides a general overview of PlanRAG but fails to mention the specific performance metrics by which it outperformed the iterative RAG method on the DQA benchmark.
+RAG Zero-shot / similarity,Zero-shot,similarity,"What is PlanRAG, and how much did it outperform the state-of-the-art iterative RAG method on the Decision QA (DQA) benchmark?",in_scope,"PlanRAG is a Plan-then-Retrieval Augmented Generation technique proposed in the paper ""PlanRAG: A Plan-then-Retrieval Augmented Generation for Generative Large Language Models as Decision Makers"" by Lee et al. in 2024. It is designed to address Decision QA, a task of answering the best decision, \(d_{best}\), for a decision-making question \(Q\), business rules \(R\), and a database \(D\). 
+
+On the Decision QA benchmark, DQA, which has two scenarios, Locating and Building, constructed from two video games (Europa Universalis IV and Victoria 3), PlanRAG outperformed the state-of-the-art iterative RAG method by 15.8% in the Locating scenario and by 7.4% in the Building scenario.",73.88,10,True,True,True,False,False,5,"The answer accurately describes PlanRAG and its performance on the Decision QA benchmark, matching the key facts from the reference answer."
+plain LLM,-,-,What two components does Search-o1 add to large reasoning models such as OpenAI-o1?,in_scope,"I apologize, but there seems to be some confusion in your question. There is no information provided about a model or system called ""Search-o1"" or ""OpenAI-o1"" that I am aware of. 
+
+If you could provide more context or clarify the names or the context in which these terms are used, I would be happy to help you with your question. 
+
+However, if we were to hypothetically consider what two components might be added to a large reasoning model like a hypothetical OpenAI model, some common additions could include:
+
+1. **Search Capabilities**: This could involve integrating a more advanced search engine or query processing system to improve the model's ability to understand and respond to complex queries.
+2. **Contextual Understanding**: Adding more sophisticated contextual understanding capabilities to help the model comprehend and respond to queries in a more nuanced and contextually relevant manner.
+
+Please provide more details or context so I can give you a more accurate and helpful answer.",6.8,0,False,,False,True,True,1,The answer does not address the components of Search-o1 and instead provides unrelated hypothetical components.
+RAG Zero-shot / similarity,Zero-shot,similarity,What two components does Search-o1 add to large reasoning models such as OpenAI-o1?,in_scope,"I focus on Agentic RAG and related AI topics. The question you're asking is not about AI, RAG, or LLM systems. It seems to be related to Search-o1 and OpenAI-o1, which I don't have information about.",6.62,0,False,,False,False,True,1,The answer declines to address the question and states it does not have information about the relevant topics.
+plain LLM,-,-,Which three retrieval tools does the A-RAG framework give to the model?,in_scope,"The A-RAG (Agriculture-Related-AI-Generated) framework is a specialized approach designed for generating relevant and accurate information for agricultural applications. While the exact details of the A-RAG framework might vary depending on the specific implementation, it typically involves the use of several retrieval tools to ensure the model can efficiently and effectively find relevant data. 
+
+The three retrieval tools commonly associated with the A-RAG framework are:
+
+1. **Textual Data Retrieval**: This tool helps in retrieving textual data from various sources such as scientific journals, agricultural reports, and other relevant literature. It ensures that the model can access and understand the latest research and findings in agriculture.
+
+2. **Image and Video Retrieval**: In agriculture, visual data is crucial for understanding crop health, soil conditions, and other visual aspects of farming. This retrieval tool allows the model to access and analyze images and videos related to agricultural practices, crop growth, and environmental conditions.
+
+3. **Sensor Data Retrieval**: This tool involves the retrieval of data from various sensors and IoT devices that monitor agricultural environments such as soil moisture, temperature, and weather conditions. This data is essential for making informed decisions about crop management and environmental practices.
+
+These retrieval tools work together to provide a comprehensive and data-rich environment for the AI model to generate accurate and relevant agricultural insights and recommendations.",9.39,0,False,,False,True,False,2,The answer provides incorrect retrieval tools that are not aligned with the A-RAG framework as described in the reference answer.
+RAG Zero-shot / similarity,Zero-shot,similarity,Which three retrieval tools does the A-RAG framework give to the model?,in_scope,I don't know based on the available sources.,51.49,10,True,True,True,False,True,5,"The answer correctly states that it does not know the information, which aligns with the reference answer's context."
+plain LLM,-,-,"What is the AgenticRAG-FP benchmark, and how well did coverage-based diagnosis find the faulty hop?",in_scope,"I apologize, but there seems to be some confusion in your question. There is no widely recognized benchmark called ""AgenticRAG-FP"" in the field of artificial intelligence or software testing. Additionally, the term ""coverage-based diagnosis"" is not typically used in the context of finding faulty hops in software or systems.
+
+AgenticRAG-FP could be a made-up term or a specific context that isn't commonly referenced in the AI or software testing community. Coverage-based diagnosis is a concept in software testing where the effectiveness of a diagnostic tool is evaluated based on how well it can identify faults within a system, but it doesn't apply to a specific benchmark like AgenticRAG-FP.
+
+If you could provide more context or clarify what you are referring to, I would be happy to help you understand the topic better.",5.49,0,False,,False,True,True,1,"The answer incorrectly claims that AgenticRAG-FP is not a recognized benchmark and misrepresents coverage-based diagnosis, failing to address the question."
+RAG Zero-shot / similarity,Zero-shot,similarity,"What is the AgenticRAG-FP benchmark, and how well did coverage-based diagnosis find the faulty hop?",in_scope,I don't know based on the available sources.,56.18,10,True,True,True,False,True,5,"The answer correctly states that it does not know based on the available sources, which aligns with the reference answer's context."
+plain LLM,-,-,"How does SPARKLE control retrieval in adaptive RAG, how is it trained, and what improvements does it report?",in_scope,"SPARKLE (Structured Pre-training and Knowledge-based Learning for Retrieval-Augmented Generation) is a model that integrates retrieval and generation in a way that allows it to leverage external knowledge to improve its performance. In the context of Adaptive Retrieval-Augmented Generation (RAG), SPARKLE controls retrieval by dynamically deciding which external knowledge sources to use based on the input context. This dynamic decision-making is crucial for improving the relevance and effectiveness of the retrieved information in the generation process.
+
+### How SPARKLE Controls Retrieval in Adaptive RAG
+
+1. **Contextual Understanding**: SPARKLE uses a contextual understanding of the input to decide which external knowledge sources to retrieve. This involves analyzing the input text to identify the most relevant external documents or knowledge sources.
+
+2. **Relevance Scoring**: The model scores the relevance of different external knowledge sources to the input context. This scoring mechanism helps in selecting the most pertinent information from the available external sources.
+
+3. **Dynamic Retrieval**: Based on the relevance scores, SPARKLE dynamically retrieves the most relevant external information at runtime. This ensures that the model is not only retrieving but also using the most relevant data, thereby improving the quality of the generated output.
+
+### Training SPARKLE
+
+Training SPARKLE involves a combination of pre-training and fine-tuning. The process typically includes the following steps:
+
+1. **Pre-training**: SPARKLE is pre-trained on a large corpus of text data. This pre-training phase helps the model to learn general language patterns and understand the context of the input text.
+
+2. **Knowledge Base Integration**: The model is trained to understand and utilize external knowledge sources. This involves training on a knowledge base, which could be a database of facts, documents, or other structured data.
+
+3. **Fine-tuning**: After pre-training, SPARKLE is fine-tuned on a specific task, such as text generation. This fine-tuning phase helps the model to adapt to the specific requirements of the task and improve its performance.
+
+### Improvements Reported by SPARKLE
+
+SPARKLE has reported several improvements in various tasks, including:
+
+1. **Relevance and Accuracy**: SPARKLE has shown to improve the relevance and accuracy of the generated text by leveraging external knowledge. This leads to more contextually relevant and informative outputs.
+
+2. **Efficiency**: By dynamically selecting the most relevant external knowledge sources, SPARKLE can reduce the amount of external data it needs to access, making the process more efficient.
+
+3. **Contextual Understanding**: The model's ability to understand the context of the input text allows it to make more informed decisions about which external knowledge sources to use, leading to better integration of external information into the generated text.
+
+4. **Task-Specific Adaptation**: SPARKLE has demonstrated improved performance on specific tasks, such as question-answering and summarization, by effectively integrating external knowledge.
+
+In summary, SPARKLE controls retrieval in Adaptive RAG by dynamically selecting the most relevant external knowledge sources based on the input context. It is trained through a combination of pre-training and fine-tuning, and it has reported improvements in relevance, accuracy, efficiency, and contextual understanding.",30.31,0,False,,False,True,False,4,"The answer provides a detailed explanation of SPARKLE's retrieval control and training but introduces inaccuracies regarding its training method and reported improvements, deviating from the reference answer."
+RAG Zero-shot / similarity,Zero-shot,similarity,"How does SPARKLE control retrieval in adaptive RAG, how is it trained, and what improvements does it report?",in_scope,I don't know based on the available sources.,90.98,10,True,True,True,False,True,5,"The answer correctly states that it does not know based on the available sources, which aligns with the guidelines for unanswerable questions."
+plain LLM,-,-,"According to the budget-aware evaluation paper on Active RAG, what should evaluations report besides accuracy, and what did the authors find?",in_scope,"According to the budget-aware evaluation paper on Active RAG (Reinforcement Learning with Active Retrieval-Augmented Generation), evaluations should report beyond just accuracy. The authors of the paper found that budget-aware evaluations are crucial for understanding the performance of models in resource-constrained settings, such as those found in real-world applications where computational resources are limited.
+
+The authors identified several aspects that should be reported in addition to accuracy, including:
+
+1. **Resource Efficiency**: This includes metrics that measure how well the model uses its available resources, such as computation time, memory usage, and energy consumption. Understanding resource efficiency is crucial for applications where energy or computational constraints are significant.
+
+2. **Latency**: This refers to the time it takes for the model to generate an output. In many applications, especially in real-time scenarios, latency is a critical factor that can affect user experience.
+
+3. **Model Complexity**: This involves assessing the complexity of the model, including its architecture, the number of parameters, and the computational complexity. Understanding model complexity helps in understanding the trade-offs between model performance and resource usage.
+
+4. **Generalization**: This aspect evaluates how well the model performs on unseen data or tasks. In resource-constrained settings, generalization is important to ensure that the model can adapt to new situations without requiring significant additional resources.
+
+5. **Robustness**: This involves testing the model's ability to handle unexpected or adversarial inputs. In resource-constrained environments, robustness is crucial to ensure that the model can maintain performance even when faced with unexpected or challenging inputs.
+
+6. **Fairness and Bias**: Evaluations should also consider whether the model is fair and unbiased, especially in applications where fairness and bias are critical, such as in legal or medical contexts.
+
+In summary, the authors found that a comprehensive evaluation should include not only accuracy but also resource efficiency, latency, model complexity, generalization, robustness, and fairness. These additional metrics provide a more holistic view of the model's performance and help in making informed decisions about its deployment in resource-constrained environments.",15.38,0,False,,False,True,False,2,The answer provides additional metrics that are not mentioned in the reference answer and fails to include the specific findings from the paper.
+RAG Zero-shot / similarity,Zero-shot,similarity,"According to the budget-aware evaluation paper on Active RAG, what should evaluations report besides accuracy, and what did the authors find?",in_scope,"According to the budget-aware evaluation paper on Active RAG, besides accuracy, evaluations should report frontiers, realized usage, threshold-transfer error, harm rates, and cost decompositions. The authors found that retrieval harm is non-negligible, router rankings change across datasets and budgets, nominal thresholds can miss target usage, and simple uncertainty or retrieval-score baselines often rival learned utility routers.",70.54,10,True,True,True,False,False,5,The answer accurately summarizes the key points from the reference answer regarding what evaluations should report and the findings of the authors.
+plain LLM,-,-,What generator and document index does the original RAG model by Lewis et al. (2020) use?,in_scope,"The original RAG (Retrieval-Augmented Generation) model by Lewis et al. (2020) does not specify a particular generator or document index. The RAG model is a framework that combines retrieval and generation to improve the quality of text generation. It does not rely on a specific generator or document index, but rather uses a retrieval mechanism to inform the generation process.
+
+In the context of the RAG model, the retrieval component is used to find relevant documents from a corpus, which are then used to inform the generation process. The specific generator and document index would depend on the implementation details of the model, which can vary based on the specific use case and the data used.
+
+If you are looking for a specific implementation or example of a RAG model, you might want to refer to the original paper or more recent implementations that provide more detailed information on these components.",6.23,0,False,,False,True,False,2,"The answer incorrectly states that the original RAG model does not specify a generator or document index, contradicting the reference answer."
+RAG Zero-shot / similarity,Zero-shot,similarity,What generator and document index does the original RAG model by Lewis et al. (2020) use?,in_scope,I don't know based on the available sources.,63.96,10,True,True,True,False,True,5,"The answer correctly states that it does not know the information, which aligns with the reference answer's context."
+plain LLM,-,-,"In A-RAG and in SPARKLE, who decides how retrieval happens: the LLM itself or a separate component?",in_scope,"In both A-RAG (Alibaba Retrieval-Augmented Generation) and SPARKLE (Structured Prompt Augmented Retrieval for Knowledge Extraction), the decision on how retrieval happens is typically made by a separate component rather than the Language Model (LLM) itself.
+
+In A-RAG, the retrieval process is usually managed by a separate retrieval component that works in conjunction with the LLM. This retrieval component is responsible for selecting the most relevant documents from a large corpus of data to feed into the LLM for processing.
+
+In SPARKLE, the retrieval process is also handled by a separate component. This component is designed to understand the context and the specific needs of the task at hand, and it selects the most relevant data to be used by the LLM for generating the final output.
+
+Therefore, in both systems, the retrieval process is not performed by the LLM directly but by a dedicated component that works in collaboration with the LLM to enhance its performance.",6.39,0,False,,False,True,False,2,"The answer incorrectly states that a separate component manages retrieval in A-RAG, contradicting the reference answer."
+RAG Zero-shot / similarity,Zero-shot,similarity,"In A-RAG and in SPARKLE, who decides how retrieval happens: the LLM itself or a separate component?",in_scope,I don't know based on the available sources.,48.07,10,True,True,True,False,True,5,"The answer correctly states that it does not know based on the available sources, which aligns with the reference answer's implication that specific knowledge is required."
+plain LLM,-,-,What accuracy did PlanRAG achieve in its Civilization VI scenario?,unanswerable,"I'm sorry, but there isn't a widely known or publicly available record of PlanRAG achieving a specific accuracy in a Civilization VI scenario. PlanRAG is a generative AI model created by Alibaba Cloud, and I don't have information about its performance in a specific game scenario like Civilization VI. Without more specific data or a reliable source, I can't provide an accurate answer to this question. If you have more details or context about this scenario, I'd be happy to try to assist further.",3.26,0,False,,True,False,True,5,"The answer correctly states that there is no information available about PlanRAG's performance in a Civilization VI scenario, aligning with the reference answer."
+RAG Zero-shot / similarity,Zero-shot,similarity,What accuracy did PlanRAG achieve in its Civilization VI scenario?,unanswerable,I don't know based on the available sources.,68.61,10,True,True,True,False,True,5,"The answer correctly states that it does not know based on the available sources, aligning with the reference answer's indication that the premise is false."

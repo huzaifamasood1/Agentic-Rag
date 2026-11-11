@@ -8,8 +8,10 @@ What lives here:
   * is_duplicate()     - checks if a document is already stored
   * reset_database()   - empties the collection (used by `ingest.py --reset`)
 """
+import threading
 from functools import lru_cache
 
+from chromadb.api.shared_system_client import SharedSystemClient
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
@@ -40,16 +42,34 @@ def make_store(collection_name: str = config.COLLECTION_NAME, persist: bool = Tr
     )
 
 
+_store_lock = threading.Lock()
+
+
 @lru_cache(maxsize=1)
+def _open_store() -> Chroma:
+    try:
+        return make_store()
+    except Exception:
+        # A failed start can leave a half-built Chroma client in its global cache
+        # (error: "'RustBindingsAPI' object has no attribute 'bindings'"). Clear it and retry once.
+        SharedSystemClient.clear_system_cache()
+        return make_store()
+
+
 def get_vector_store() -> Chroma:
-    """Open the saved Chroma collection (it is created on first use)."""
-    return make_store()
+    """Open the saved Chroma collection (it is created on first use).
+
+    The lock matters in Streamlit: several script threads can call this at the same
+    moment, and two Chroma clients starting on one folder at once collide.
+    """
+    with _store_lock:
+        return _open_store()
 
 
 def reset_database() -> None:
     """Delete every chunk and start with an empty collection."""
     get_vector_store().delete_collection()
-    get_vector_store.cache_clear()
+    _open_store.cache_clear()
 
 
 def search(query: str, k: int = config.DEFAULT_K, mode: str = "similarity",

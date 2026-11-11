@@ -1,9 +1,10 @@
 """
-self_test.py - Check that the whole system works WITHOUT an OpenAI key.
+self_test.py - Check that the whole system works WITHOUT an OpenAI key
+or a running Ollama.
 
 Run with:   python self_test.py
 
-A pretend AI (a "fake LLM") replaces OpenAI, and simple fake embeddings replace
+A pretend AI (a "fake LLM") replaces the Ollama chat model, and simple fake embeddings replace
 the real ones, so this costs nothing and needs no key. It tests:
   1. Vector database (HNSW settings, adding chunks, 3 search modes)
   2. Ingestion (PDF pages kept, Markdown sections kept, YouTube links understood)
@@ -214,4 +215,4 @@ except Exception as error:
 # ---- Summary -------------------------------------------------------------------------
 print(f"\n===== {passed} passed, {failed} failed =====")
 if failed == 0:
-    print("Everything works. Add the real OpenAI key to .env and run:  streamlit run app.py")
+    print("Everything works. Make sure Ollama is running (and your .env is set), then run:  streamlit run app.py")

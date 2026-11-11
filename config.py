@@ -9,19 +9,20 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-load_dotenv(PROJECT_ROOT / ".env")  # reads OPENAI_API_KEY (and anything else) from .env
-
-# ---- Topic ------------------------------------------------------------------
-# The knowledge base is ABOUT Agentic RAG: what RAG is, how agents plan, retrieve,
-# reflect and use tools, vector databases, embeddings, prompting, evaluation.
-TOPIC = "Agentic RAG (retrieval-augmented generation, LLM agents and the techniques behind them)"
+load_dotenv(PROJECT_ROOT / ".env")  # reads settings from .env; OPENAI_API_KEY is only needed for the judge, image descriptions and OpenAI embeddings
 
 # ---- Models -------------------------------------------------------------------
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 if OPENAI_API_KEY in ("", "your_key_here", "your_openai_api_key_here"):
     OPENAI_API_KEY = ""
-CHAT_MODEL = os.getenv("CHAT_MODEL", "gpt-4o-mini")        # cheap + fast, good for a demo
-VISION_MODEL = os.getenv("VISION_MODEL", "gpt-4o-mini")    # describes images (it can read pictures)
+# Chat model: runs locally through Ollama (agent.get_llm), NOT through OpenAI. Pull it first:
+#   ollama pull qwen2.5:3b
+CHAT_MODEL = os.getenv("CHAT_MODEL", "qwen2.5:3b")
+# Vision model: OpenAI API (needs OPENAI_API_KEY); describes images found in PDFs/uploads.
+VISION_MODEL = os.getenv("VISION_MODEL", "gpt-4o-mini")
+# Model that grades answers in evaluate.py (OpenAI API, needs OPENAI_API_KEY). Kept different
+# from CHAT_MODEL (a local Ollama model) so the system does not grade its own answers.
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", "gpt-4o-mini")
 
 # "openai" -> text-embedding-3-small (1536 numbers per vector, needs the API key)
 # "local"  -> all-MiniLM-L6-v2 (384 numbers per vector, free, needs sentence-transformers)

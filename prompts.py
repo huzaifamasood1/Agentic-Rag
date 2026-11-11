@@ -114,13 +114,11 @@ Answer:"""
 
 CHAIN_OF_THOUGHT = BASE_RULES + """
 
-Think step by step:
-Step 1 - Find which sources are relevant to the question.
-Step 2 - Pull out the key facts from those sources.
-Step 3 - Connect the facts into an explanation.
-Step 4 - Write the final answer with citations.
-
-Show your steps briefly, then write "Final answer:" followed by the answer.
+Think step by step. Use EXACTLY this format, one line per step, nothing before or after:
+Step 1 - Relevant sources: <which source numbers matter and why>
+Step 2 - Key facts: <the key facts from those sources, with citations>
+Step 3 - Connection: <how the facts fit together to answer the question>
+Final answer: <the answer, with citations>
 
 Sources:
 {context}
@@ -129,11 +127,15 @@ Question: {question}"""
 
 TREE_OF_THOUGHTS = BASE_RULES + """
 
-Use a Tree of Thoughts approach:
-1. Write 2-3 different possible explanations (branches) based on the sources.
-2. For each branch, rate how well the sources support it (strong / weak / none).
-3. Pick the best-supported branch and explain why.
-4. Write "Final answer:" followed by the answer with citations.
+Use a Tree of Thoughts approach. Use EXACTLY this format, one line each, nothing before or after:
+Branch A: <first possible explanation, with citations>
+Support A: <strong | weak | none> - <one short reason>
+Branch B: <second possible explanation, with citations>
+Support B: <strong | weak | none> - <one short reason>
+Branch C: <third possible explanation, with citations (optional, skip if there are only two)>
+Support C: <strong | weak | none> - <one short reason>
+Best: <A | B | C> - <why this branch is best supported>
+Final answer: <the answer based on the best branch, with citations>
 
 Sources:
 {context}

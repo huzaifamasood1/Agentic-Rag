@@ -16,7 +16,7 @@ decides whether to search, what to search for, where to search, and whether to s
 | Michael | PDFs: research papers → `data/pdfs/` |
 | Fatema | Web articles → `data/urls.txt`, YouTube videos → `data/youtube.txt` |
 | Dimitri | Images: diagrams and screenshots → `data/images/` |
-| Jeniffer | OpenAI API key (sent privately, goes into `.env`) |
+| Jeniffer | OpenAI API key (sent privately, goes into `.env`); used only for the evaluation judge and image descriptions |
 
 ---
 
@@ -270,6 +270,7 @@ also leave `data/pdfs/` out and let people run `download_papers.py`).
   safety layer for a demo, not a full security sandbox.
 - arXiv and Wikipedia are free public APIs; no key needed. arXiv asks for a 3-second pause
   between requests, so arXiv searches take a few seconds.
-- OpenAI usage costs money (small with gpt-4o-mini). Each image description is one API call.
+- Answers (planning, reflection, writing) run locally on Ollama (`CHAT_MODEL`, default `qwen2.5:3b`), so they are free.
+- OpenAI is used only for the evaluation judge (`JUDGE_MODEL`), image descriptions (`VISION_MODEL`) and, if you set `EMBEDDING_PROVIDER=openai`, embeddings. It costs money (small with gpt-4o-mini); each image description is one API call.
 - If Marker isn't installed, PDFs fall back to pypdf (plain text per page; figures still extracted when possible).
 - Report only numbers you actually measured.

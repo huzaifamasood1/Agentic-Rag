@@ -12,6 +12,7 @@ import agent
 import config
 import ingest
 import prompts
+import reasoning
 import vector_store
 
 st.set_page_config(page_title="Agentic RAG Assistant", page_icon="🤖", layout="wide")
@@ -59,8 +60,35 @@ with st.sidebar:
 
 
 # ---- Main area: chat -----------------------------------------------------------
-def show_result(result):
-    st.markdown(result["answer"])
+def show_answer(result, question=""):
+    """Zero/Few-shot: plain text. Chain of Thought: a chain of steps. Tree of Thoughts: a tree."""
+    style, answer = result.get("style"), result["answer"]
+    if style == "Chain of Thought" and (chain := reasoning.parse_chain(answer)):
+        for number, (title, text) in enumerate(chain["steps"], start=1):
+            with st.container(border=True):
+                st.markdown(f"**Step {number} · {title}**")
+                st.markdown(text)
+            st.markdown("<div style='text-align:center'>⬇️</div>", unsafe_allow_html=True)
+        st.success(chain["final"])
+    elif style == "Tree of Thoughts" and (tree := reasoning.parse_tree(answer)):
+        st.graphviz_chart(reasoning.tree_to_dot(question, tree), use_container_width=True)
+        icons = {"strong": "🟢", "weak": "🟡", "none": "🔴"}
+        for letter, branch in tree["branches"].items():
+            star = " ⭐ **chosen**" if letter == tree["best"] else ""
+            with st.expander(f"{icons.get(branch['support'], '⚪')} Branch {letter} · "
+                             f"{branch['support']} support{star}", expanded=letter == tree["best"]):
+                st.markdown(branch["text"])
+                if branch["why"]:
+                    st.caption(f"Support: {branch['why']}")
+        if tree["best_why"]:
+            st.info(f"**Why branch {tree['best']}:** {tree['best_why']}")
+        st.success(tree["final"])
+    else:
+        st.markdown(answer)
+
+
+def show_result(result, question=""):
+    show_answer(result, question)
     if result.get("sources"):
         with st.expander(f"📚 Sources ({len(result['sources'])})"):
             for i, doc in enumerate(result["sources"], start=1):
@@ -78,7 +106,7 @@ def show_result(result):
     st.caption(f"⏱ {result['seconds']} s")
 
 
-def show_turn(base, result):
+def show_turn(base, result, question=""):
     if base:
         left, right = st.columns(2)
         with left:
@@ -87,9 +115,9 @@ def show_turn(base, result):
             st.caption(f"⏱ {base['seconds']} s · no sources")
         with right:
             st.subheader("✅ Our agentic RAG")
-            show_result(result)
+            show_result(result, question)
     else:
-        show_result(result)
+        show_result(result, question)
 
 
 if "history" not in st.session_state:
@@ -99,7 +127,7 @@ for item in st.session_state.history:
     with st.chat_message("user"):
         st.markdown(item["question"])
     with st.chat_message("assistant"):
-        show_turn(item.get("base"), item["result"])
+        show_turn(item.get("base"), item["result"], item["question"])
 
 question = st.chat_input("Ask anything about Agentic RAG...")
 if question:
@@ -114,7 +142,7 @@ if question:
                     base = agent.ask_base_llm(question)
             with st.spinner("Planning, searching, answering..."):
                 result = agent.ask(question, style, k, search_mode)
-            show_turn(base, result)
+            show_turn(base, result, question)
             st.session_state.history.append({"question": question, "base": base, "result": result})
         except Exception as error:
             st.error(f"Something went wrong: {type(error).__name__}: {error}. "

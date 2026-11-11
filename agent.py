@@ -163,7 +163,9 @@ def ask(question: str, style: str = "Zero-shot", k: int = config.DEFAULT_K,
     prompt = prompts.ANSWER_PROMPTS[style].format(context=format_context(docs), question=question)
     answer = get_llm().invoke(prompt).content
     trace.append(f"Wrote answer using {len(docs)} sources ({style} prompt)")
-    return _result(answer, docs, trace, start)
+    result = _result(answer, docs, trace, start)
+    result["style"] = style  # lets the UI show Chain / Tree of Thoughts answers differently
+    return result
 
 
 def ask_base_llm(question: str) -> dict:

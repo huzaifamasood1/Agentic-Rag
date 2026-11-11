@@ -22,7 +22,7 @@ What we measure (an LLM judge compares each answer with the reference answer):
     * response time   - seconds per answer
 Results go to evaluation_results/ (open the CSVs in Excel for the slides).
 
-Note: the judge is an LLM (gpt-4o-mini by default), so scores are an automatic estimate.
+Note: the judge is an LLM (gpt-4o-mini via the OpenAI API by default; set JUDGE_MODEL in .env to change), so scores are an automatic estimate.
 Check a sample by hand for the presentation.
 """
 import argparse
@@ -31,6 +31,7 @@ import json
 import statistics
 from pathlib import Path
 
+from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
 import agent
@@ -85,8 +86,14 @@ ANSWER:
 {answer}"""
 
 
+def get_judge_llm():
+    if not config.OPENAI_API_KEY:
+        raise SystemExit("The judge uses the OpenAI API: set OPENAI_API_KEY in .env")
+    return ChatOpenAI(model=config.JUDGE_MODEL, temperature=0, api_key=config.OPENAI_API_KEY)
+
+
 def judge(question, category, reference, answer) -> Judgement:
-    return agent.get_llm().with_structured_output(Judgement).invoke(JUDGE_PROMPT.format(
+    return get_judge_llm().with_structured_output(Judgement).invoke(JUDGE_PROMPT.format(
         question=question, category=category, reference=reference, answer=answer))
 
 
@@ -94,7 +101,7 @@ def is_faithful(answer, sources):
     if not sources:
         return None  # nothing to compare against
     text = "\n\n".join(d.page_content for d in sources)
-    return agent.get_llm().with_structured_output(Faithfulness).invoke(
+    return get_judge_llm().with_structured_output(Faithfulness).invoke(
         FAITHFUL_PROMPT.format(sources=text[:30000], answer=answer)).faithful
 
 
@@ -124,7 +131,7 @@ def summarise(name, rows):
 def main():
     parser = argparse.ArgumentParser(description="Plain LLM vs agentic RAG evaluation")
     parser.add_argument("--cases", default=str(CASES_FILE), help="JSON file with test questions")
-    parser.add_argument("--styles", default="Zero-shot",
+    parser.add_argument("--styles", default="Tree of Thoughts",
                         help=f"Comma-separated prompt styles or 'all' ({', '.join(prompts.ANSWER_PROMPTS)})")
     parser.add_argument("--modes", default="similarity",
                         help=f"Comma-separated search modes or 'all' ({', '.join(vector_store.SEARCH_MODES)})")
