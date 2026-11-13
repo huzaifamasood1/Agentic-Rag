@@ -1,3 +1,3 @@
 system,questions,accuracy_in_scope_%,hallucination_all_%,hallucination_unanswerable_%,refusal_unanswerable+out_of_scope_%,false_refusal_in_scope_%,avg_relevance_1to5,faithfulness_%,avg_seconds,median_seconds,avg_sources
-plain LLM,9,0.0,77.8,0.0,100.0,25.0,2.44,,9.91,6.39,0
-RAG Zero-shot / similarity,9,87.5,0.0,0.0,100.0,75.0,4.56,100.0,58.93,63.96,8.9
+plain LLM,9,0.0,77.8,0.0,100.0,25.0,2.44,,14.43,6.64,0
+RAG Tree of Thoughts / similarity,9,87.5,0.0,0.0,100.0,87.5,4.56,100.0,48.12,53.77,8.9

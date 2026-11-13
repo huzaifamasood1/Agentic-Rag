@@ -6,7 +6,7 @@ ignores the format, the parsers return None and the UI shows the plain text inst
 """
 import re
 
-SUPPORT_COLORS = {"strong": "#2e7d32", "weak": "#f9a825", "none": "#c62828"}
+SUPPORT_COLORS = {"strong": "#34d399", "weak": "#fbbf24", "none": "#fb7185"}
 
 
 def _clean(text: str) -> str:
@@ -66,16 +66,17 @@ def _wrap(text: str, width: int = 38, max_lines: int = 5) -> str:
 def tree_to_dot(question: str, tree: dict) -> str:
     """Graphviz source: question -> branches (coloured by support) -> final answer."""
     out = ['digraph T {', 'rankdir=LR; bgcolor="transparent";',
-           'node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fontcolor=white];',
-           f'q [label="{_wrap(question, 30, 4)}", fillcolor="#455a64"];']
+           'edge [color="#6d7bb8"];',
+           'node [shape=box, style="rounded,filled", fontname="Courier", fontsize=10, fontcolor="#04101a"];',
+           f'q [label="{_wrap(question, 30, 4)}", fillcolor="#a78bfa"];']
     for letter, b in tree["branches"].items():
         color = SUPPORT_COLORS.get(b["support"], "#757575")
         chosen = letter == tree["best"]
         label = f'{letter} ({b["support"]})\\n{_wrap(b["text"])}'
-        pen = ', penwidth=4, color="#1565c0"' if chosen else ""
+        pen = ', penwidth=4, color="#22d3ee"' if chosen else ""
         out.append(f'{letter} [label="{label}", fillcolor="{color}"{pen}];')
         out.append(f'q -> {letter};')
-    out.append(f'ans [label="Final answer\\n{_wrap(tree["final"], 38, 6)}", fillcolor="#1565c0"];')
-    out.append(f'{tree["best"]} -> ans [penwidth=3, color="#1565c0"];')
+    out.append(f'ans [label="Final answer\\n{_wrap(tree["final"], 38, 6)}", fillcolor="#22d3ee"];')
+    out.append(f'{tree["best"]} -> ans [penwidth=3, color="#22d3ee"];')
     out.append("}")
     return "\n".join(out)

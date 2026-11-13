@@ -13,7 +13,10 @@ pydantic>=2
 beautifulsoup4            # web articles (WebBaseLoader)
 pypdf                     # PDF text + images if Marker is not installed
 Pillow                    # images
-youtube-transcript-api    # YouTube video transcripts
+youtube-transcript-api    # YouTube video transcripts (method 1)
+yt-dlp                    # fallback: captions or audio download (methods 2-3)
+faster-whisper            # fallback: local speech-to-text when captions are blocked
+av<17                     # faster-whisper breaks with av 17+
 pytesseract
 langchain-huggingface
 sentence-transformers

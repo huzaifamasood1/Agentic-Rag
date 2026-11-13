@@ -135,20 +135,108 @@ def youtube_id(url: str) -> str:
     return parse_qs(parsed.query).get("v", [url])[0]
 
 
-def load_youtube(url: str) -> list[dict]:
-    """Download the caption transcript of a video. Adds a [mm:ss] mark about every minute
-    so answers can point to the moment in the video."""
-    try:
-        from youtube_transcript_api import YouTubeTranscriptApi
-    except ImportError as error:
-        raise RuntimeError("Install youtube-transcript-api to load videos.") from error
+TRANSCRIPT_FOLDER = config.PROJECT_ROOT / "data" / "transcripts"
 
-    video = youtube_id(url)
+
+def _snippets_from_api(video: str) -> list[tuple[float, str]]:
+    """Method 1: youtube-transcript-api (fast, but YouTube often blocks it)."""
+    from youtube_transcript_api import YouTubeTranscriptApi
     if hasattr(YouTubeTranscriptApi, "fetch"):                  # version 1.x
-        snippets = [(s.start, s.text) for s in YouTubeTranscriptApi().fetch(video, languages=["en"])]
-    else:                                                        # version 0.6.x
-        snippets = [(s["start"], s["text"]) for s in
-                    YouTubeTranscriptApi.get_transcript(video, languages=["en"])]
+        return [(s.start, s.text) for s in YouTubeTranscriptApi().fetch(video, languages=["en"])]
+    return [(s["start"], s["text"]) for s in                    # version 0.6.x
+            YouTubeTranscriptApi.get_transcript(video, languages=["en"])]
+
+
+def _ytdlp_options(**extra) -> dict:
+    options = {"quiet": True, "no_warnings": True, "noprogress": True, **extra}
+    browser = getattr(config, "YOUTUBE_COOKIES_BROWSER", "")    # e.g. "chrome" - optional
+    if browser:
+        options["cookiesfrombrowser"] = (browser,)
+    return options
+
+
+def _snippets_from_ytdlp_subtitles(video: str) -> tuple[list[tuple[float, str]], str]:
+    """Method 2: yt-dlp downloads the (auto) captions. Returns (snippets, title)."""
+    import tempfile
+    import yt_dlp
+    with tempfile.TemporaryDirectory() as folder:
+        options = _ytdlp_options(skip_download=True, writesubtitles=True, writeautomaticsub=True,
+                                 subtitleslangs=["en.*", "en"], subtitlesformat="json3",
+                                 outtmpl=f"{folder}/%(id)s")
+        with yt_dlp.YoutubeDL(options) as ydl:
+            info = ydl.extract_info(f"https://www.youtube.com/watch?v={video}", download=True)
+        files = sorted(Path(folder).glob("*.json3"))
+        if not files:
+            raise RuntimeError("no English captions available")
+        import json
+        events = json.loads(files[0].read_text(encoding="utf-8")).get("events", [])
+        snippets = []
+        for event in events:
+            text = "".join(seg.get("utf8", "") for seg in event.get("segs", []) or []).strip()
+            if text:
+                snippets.append((event.get("tStartMs", 0) / 1000, text))
+        return snippets, info.get("title", video)
+
+
+def _snippets_from_whisper(video: str) -> tuple[list[tuple[float, str]], str]:
+    """Method 3: download the audio with yt-dlp and transcribe it locally with Whisper.
+    Works even when the video has no captions. Slow the first time (model download)."""
+    import tempfile
+    import yt_dlp
+    from faster_whisper import WhisperModel
+    with tempfile.TemporaryDirectory() as folder:
+        options = _ytdlp_options(format="bestaudio[ext=m4a]/bestaudio", outtmpl=f"{folder}/%(id)s.%(ext)s")
+        with yt_dlp.YoutubeDL(options) as ydl:
+            info = ydl.extract_info(f"https://www.youtube.com/watch?v={video}", download=True)
+        audio = next(Path(folder).glob(f"{video}.*"))
+        model = WhisperModel(getattr(config, "WHISPER_MODEL", "base.en"), compute_type="int8")
+        segments, _ = model.transcribe(str(audio), language="en", vad_filter=True)
+        return [(s.start, s.text.strip()) for s in segments], info.get("title", video)
+
+
+def _oembed_title(url: str, fallback: str) -> str:
+    try:
+        import requests
+        return requests.get("https://www.youtube.com/oembed",
+                            params={"url": url, "format": "json"}, timeout=10).json()["title"]
+    except Exception:
+        return fallback
+
+
+def fetch_youtube_snippets(video: str, url: str) -> tuple[list[tuple[float, str]], str]:
+    """Get [(start_seconds, text)] and the title. Tries each method in turn and caches the
+    result in data/transcripts/<id>.json so YouTube is only contacted once per video."""
+    import json
+    cache = TRANSCRIPT_FOLDER / f"{video}.json"
+    if cache.exists():
+        saved = json.loads(cache.read_text(encoding="utf-8"))
+        return [tuple(s) for s in saved["snippets"]], saved["title"]
+
+    errors = []
+    methods = [("youtube-transcript-api", lambda: (_snippets_from_api(video), None)),
+               ("yt-dlp captions", lambda: _snippets_from_ytdlp_subtitles(video)),
+               ("yt-dlp audio + Whisper", lambda: _snippets_from_whisper(video))]
+    for name, method in methods:
+        try:
+            snippets, title = method()
+            if not snippets:
+                raise RuntimeError("empty transcript")
+            print(f"  transcript via {name}")
+            title = title or _oembed_title(url, video)
+            TRANSCRIPT_FOLDER.mkdir(parents=True, exist_ok=True)
+            cache.write_text(json.dumps({"title": title, "snippets": snippets}), encoding="utf-8")
+            return snippets, title
+        except Exception as error:
+            errors.append(f"{name}: {type(error).__name__}: {str(error).splitlines()[0][:120] if str(error) else ''}")
+            print(f"  {name} failed, trying next method...")
+    raise RuntimeError("Could not get a transcript. " + " | ".join(errors))
+
+
+def load_youtube(url: str) -> list[dict]:
+    """Get the transcript of a video (with fallbacks, see fetch_youtube_snippets). Adds a
+    [mm:ss] mark about every minute so answers can point to the moment in the video."""
+    video = youtube_id(url)
+    snippets, title = fetch_youtube_snippets(video, url)
 
     pieces, next_mark = [], 0
     for start, text in snippets:
@@ -157,14 +245,6 @@ def load_youtube(url: str) -> list[dict]:
             next_mark = start + 60
         pieces.append(text.replace("\n", " "))
     transcript = " ".join(pieces).strip()
-
-    title = video
-    try:
-        import requests
-        title = requests.get("https://www.youtube.com/oembed",
-                             params={"url": url, "format": "json"}, timeout=10).json()["title"]
-    except Exception:
-        pass
     return [{"text": transcript, "markdown": False,
              "metadata": {"source": f"YouTube: {title}", "url": f"https://www.youtube.com/watch?v={video}"}}]
 
